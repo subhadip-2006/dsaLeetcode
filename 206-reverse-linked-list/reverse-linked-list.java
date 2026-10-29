@@ -11,17 +11,14 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
         if(head == null) return head;
-        ArrayList<ListNode> arr = new ArrayList<>();
-        ListNode temp = head;
-        while(temp != null){
-            arr.add(temp);
-            temp = temp.next;
+        ListNode p = null;
+        ListNode c = head;
+        while(c != null){
+            ListNode f = c.next;
+            c.next = p;
+            p = c;
+            c = f;
         }
-        temp = head;
-        for(int i=arr.size()-1;i>=1;i--){
-            arr.get(i).next = arr.get(i-1);
-        }
-        arr.get(0).next = null;
-        return arr.get(arr.size()-1);
+        return p;
     }
 }
