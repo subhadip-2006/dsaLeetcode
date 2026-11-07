@@ -9,8 +9,37 @@
  * }
  */
 class Solution {
+    public ListNode reverse(ListNode head){
+        if(head == null) return head;
+        ListNode p = null;
+        ListNode c = head;
+        while(c != null){
+            ListNode f = c.next;
+            c.next = p;
+            p = c;
+            c = f;
+        }
+        return p;
+    }
     public boolean isPalindrome(ListNode head) {
-        ArrayList<ListNode> arr = new ArrayList<>();
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast.next!=null && fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode head2 = slow.next;
+        slow.next = null;
+        head2 = reverse(head2);
+        ListNode i = head;
+        ListNode j = head2;
+        while(j != null){
+            if(i.val != j.val) return false;
+            i = i.next;
+            j = j.next;
+        }
+        return true;
+/*      ArrayList<ListNode> arr = new ArrayList<>();
         ListNode temp = head;
         while(temp != null){
             arr.add(temp);
@@ -23,5 +52,6 @@ class Solution {
             j--;
         }
         return true;
+*/
     }
 }
