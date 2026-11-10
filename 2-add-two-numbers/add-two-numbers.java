@@ -18,43 +18,16 @@ class Solution {
         ListNode d = dummy;
         while(t1 != null || t2 != null){
             ListNode temp = new ListNode();
-            if(t1 != null && t2 == null){
-                sum = t1.val + 0 + carry;
-                if(sum>9){
-                    sum%=10;
-                    carry = 1;
-                }
-                else carry = 0;
-                t1 = t1.next;
-                temp.val = sum;
-                dummy.next = temp;
-                dummy = dummy.next;
-            }
-            else if(t2 != null && t1 == null){
-                sum = 0 + t2.val + carry;
-                if(sum>9){
-                    sum%=10;
-                    carry = 1;
-                }
-                else carry = 0;
-                t2 = t2.next;
-                temp.val = sum;
-                dummy.next = temp;
-                dummy = dummy.next;
-            }
-            else{
-                sum = t1.val + t2.val + carry;
-                if(sum>9){
-                    sum%=10;
-                    carry = 1;
-                }
-                else carry = 0;
-                t1 = t1.next;
-                t2 = t2.next;
-                temp.val = sum;
-                dummy.next = temp;
-                dummy = dummy.next;
-            }
+            int x = (t1 != null) ? t1.val : 0;
+            int y = (t2 != null) ? t2.val : 0;
+            sum = x + y + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            if(t1 != null) t1 = t1.next;
+            if(t2 != null) t2 = t2.next;
+            temp.val = sum;
+            dummy.next = temp;
+            dummy = dummy.next;
         }
         if(carry==1){
             ListNode temp = new ListNode(1);
